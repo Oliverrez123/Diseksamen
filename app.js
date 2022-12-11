@@ -56,7 +56,7 @@ const hashPassword = (password) => {
 
 
 
-app.use(express.static(__dirname + '/public'))
+app.use(express.static(__dirname + '/FrontDev'))
 
 app.use(
     session({
@@ -70,7 +70,7 @@ app.get("/", (req, res) => {
     if (req.session.loggedIn) {
         return res.redirect("/dashboard");
     } else {
-        return res.sendFile("login.html", { root: path.join(__dirname, "public") });
+        return res.sendFile("login.html", { root: path.join(__dirname, "FrontDev") });
     }
 });
 
@@ -132,7 +132,7 @@ app.get("/signup", (req, res) => {
   if (req.session.loggedIn) {
       return res.redirect("/dashboard");
   } else {
-      return res.sendFile("signup.html", { root: path.join(__dirname, "public") });
+      return res.sendFile("signup.html", { root: path.join(__dirname, "FrontDev") });
   }
 });
 
