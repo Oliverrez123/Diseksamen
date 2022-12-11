@@ -1,0 +1,23 @@
+{
+  "name": "diseksamen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Oliverrez123/Diseksamen.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Oliverrez123/Diseksamen/issues"
+  },
+  "homepage": "https://github.com/Oliverrez123/Diseksamen#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
