@@ -7,14 +7,19 @@
     <title>Document</title>
 </head>
 <body>
-  <h1>Velkommen til REZ1337</h1>
+  <form action="/authenticate" method="post" id='form'>
     <h2>Login</h2>
-    <form id="form" action="/authenticate" method="post">
-      <input type="text" placeholder="Username" id="username" />
-      <input type="password" placeholder="Password" id="password" />
-      <input class="knap" id="submit" value="Login" type="submit" />
-    </form>
-
+    <div class="input-field">
+        <input type="text" name="username" id="username" placeholder="Enter Username">
+    </div>
+    <br>
+    <div class="input-field">
+        <input type="password" name="password" id="password" placeholder="Enter Password">
+    </div>
+    <br>
+    <input type="submit" value="Log In" id='button'>
+</form>
+    
   <p>Har du brug for en ny bruger?</p>
         <a class="link" href="./signup.html">Så opret dig her</a>
 

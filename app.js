@@ -22,6 +22,7 @@ const addUserToDatabase = (username, password) => {
   db.run(
     'insert into users (username, password) values (?, ?)', 
     [username, password], 
+    console.log(username + password),
     function(err) {
       if (err) {
         console.error(err);
@@ -30,12 +31,12 @@ const addUserToDatabase = (username, password) => {
   );
 }
 
-const getUserByUsername = (userName) => {
+const getUserByUsername = (username) => {
   // Smart måde at konvertere fra callback til promise:
   return new Promise((resolve, reject) => {  
     db.all(
       'select * from users where userName=(?)',
-      [userName], 
+      [username], 
       (err, rows) => {
         if (err) {
           console.error(err);
@@ -68,25 +69,20 @@ app.use(
 
 app.get("/", (req, res) => {
     if (req.session.loggedIn) {
-        return res.redirect("/dashboard");
+        return res.sendFile("/index.html", { root: path.join(__dirname, "FrontDev")});
     } else {
         return res.sendFile("login.html", { root: path.join(__dirname, "FrontDev") });
     }
 });
 
 
-// Et dashboard som kun brugere med 'loggedIn' = true i session kan se
-app.get("/dashboard", (req, res) => {
-  if (req.session.loggedIn) {
-    // Her generere vi en html side med et brugernavn på (Tjek handlebars.js hvis du vil lave fancy html på server siden)
-    res.setHeader("Content-Type", "text/html");
-    res.write("Welcome " + req.session.username + " to your dashboard");
-    res.write('<a href="/logout">Logout</a>')
-    return res.end();
-  } else {
-    return res.redirect("/");
-  }
-});
+
+
+
+
+
+
+
 
 
 
@@ -103,7 +99,7 @@ app.post("/authenticate", bodyParser.urlencoded(), async (req, res) => {
 
   if(user.length === 0) {
     console.log('no user found')
-    return res.redirect('/')
+    return res.sendFile("login.html", { root: path.join(__dirname, "FrontDev") });
   }
 
   // Hint: Her skal vi tjekke om brugeren findes i databasen og om passwordet er korrekt
@@ -111,7 +107,7 @@ app.post("/authenticate", bodyParser.urlencoded(), async (req, res) => {
       req.session.loggedIn = true;
       req.session.username = req.body.username;
       console.log(req.session);
-      res.redirect("/dashboard");
+      res.sendFile("index.html", { root: path.join(__dirname, "FrontDev") });
   } else {
       // Sender en error 401 (unauthorized) til klienten
       return  res.sendStatus(401);
@@ -138,6 +134,7 @@ app.get("/signup", (req, res) => {
 
 app.post("/signup", bodyParser.urlencoded(), async (req, res) => {
   const user = await getUserByUsername(req.body.username)
+  console.log(user)
   if (user.length > 0) {
     return res.send('Username already exists');
   }
@@ -146,6 +143,7 @@ app.post("/signup", bodyParser.urlencoded(), async (req, res) => {
   // Brug funktionen hashPassword til at kryptere passwords (husk både at hash ved signup og login!)
   let hashedPassword = hashPassword(req.body.password)
   addUserToDatabase(req.body.username, hashedPassword);
+  console.log(req.body.username, req.body.password)
   res.redirect('/');
 })  
   
