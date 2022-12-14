@@ -1,7 +1,7 @@
 
 //const connection = require('/../db')
 
-
+/*
 function drag(ev) {
     ev.dataTransfer.setData("text", ev.target.id);
 }
@@ -65,7 +65,7 @@ function(err) {
   }
 }
 );
-} */
+} 
 
 function editTask(){
     var saveButton = document.getElementById("save-button");
@@ -79,3 +79,4 @@ function editTask(){
     }
 }
 
+*/

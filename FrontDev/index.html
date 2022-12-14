@@ -36,41 +36,15 @@
         }
     }
 
-/*
-    const saveTaskToDatabase = (taskname) => {
-        const taskname = document.getElementById('task-name').value
-  connection.query(
-    'insert into task_table1 (taskname) values (?)', 
-    [task], 
-    console.log(task),
-    function(err) {
-      if (err) {
-        console.error(err);
-      }
-    }
-  );
-} */
-    /*function saveTask(){
-     
 
-       /* var todo = document.getElementById("todo");
+    function saveTask(){
+     var todo = document.getElementById("todo");
         var taskName = document.getElementById("task-name").value;
         todo.innerHTML += `
         <div class="task" id="${taskName.toLowerCase().split(" ").join("")}" draggable="true" ondragstart="drag(event)">
             <span>${taskName}</span>
-        </div>
-        ` */
-     /*   connection.query(
-    'insert into task_table1 (taskname) values (?)', 
-    [taskName], 
-    console.log(taskName),
-    function(err) {
-      if (err) {
-        console.error(err);
-      }
-    }
-  );
-    } */
+        </div>`
+          } 
 
     function editTask(){
         var saveButton = document.getElementById("save-button");
@@ -142,7 +116,7 @@
                 </span>
                 <span class="form-row-buttons">
                     <button id="edit-button" onclick="editTask()">Edit</span>
-                    <button id="save-button" onclick="editTask()">Save</span>
+                    <button id="save-button" onclick="saveTask()">Save</span>
                     <button id="cancel-button" onclick="createTask()">Cancel</span>
                 </span>
             </div>
