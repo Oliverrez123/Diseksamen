@@ -6,21 +6,27 @@ const app = express();
 const port = 2000;
 const sqlite3 = require('sqlite3').verbose();
 var crypto = require('crypto');
+const connection = require('./db')
+const taskName = require('./FrontDev/index')
 
 
+const userDB = connection.query('CREATE TABLE if not exists user_table (user_id int NOT NULL AUTO_INCREMENT, username varchar(255), password varchar(255), PRIMARY KEY(user_id))')
+
+const taskDB1 = connection.query('CREATE TABLE if not exists task_table (task_id int NOT NULL AUTO_INCREMENT, taskname varchar(255), process varchar(255), PRIMARY KEY(task_id))')
+const taskDB = connection.query('CREATE TABLE if not exists task_table1 (task_id int NOT NULL AUTO_INCREMENT, taskname varchar(255), PRIMARY KEY(task_id))')
 // Sqlite ting
-const db = new sqlite3.Database('./db.sqlite');
+//const db = new sqlite3.Database('./db.sqlite');
 
-db.serialize(function() {
+/*db.serialize(function() {
   console.log('creating databases if they don\'t exist');
   db.run('create table if not exists users (userId integer primary key, username text not null, password text not null)');
-});
-
+});*/
+ 
 
 // Tilføjer user til db
 const addUserToDatabase = (username, password) => {
-  db.run(
-    'insert into users (username, password) values (?, ?)', 
+  connection.query(
+    'insert into user_table (username, password) values (?, ?)', 
     [username, password], 
     console.log(username + password),
     function(err) {
@@ -31,11 +37,24 @@ const addUserToDatabase = (username, password) => {
   );
 }
 
+function saveTask(taskName){
+  connection.query(
+'insert into task_table1 (taskname) values (?)', 
+[taskName], 
+console.log(taskName),
+function(err) {
+if (err) {
+  console.error(err);
+}}
+)}
+
+
+
 const getUserByUsername = (username) => {
   // Smart måde at konvertere fra callback til promise:
   return new Promise((resolve, reject) => {  
-    db.all(
-      'select * from users where userName=(?)',
+    connection.query(
+      'select * from user_table where userName=(?)',
       [username], 
       (err, rows) => {
         if (err) {
@@ -120,8 +139,10 @@ app.get("/logout", (req, res) => {
   return res.send("Thank you! Visit again");
 });
 
-
-
+app.post("/saveItem", bodyParser.urlencoded(), async (req, res) => {
+  const task = await saveTask(req.body.taskName)
+  console.log(task)
+  })
 
 
 app.get("/signup", (req, res) => {
@@ -152,4 +173,4 @@ app.post("/signup", bodyParser.urlencoded(), async (req, res) => {
 
 app.listen(port, () => {
   console.log("Website is running");
-});
+}); 
