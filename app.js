@@ -3,7 +3,7 @@ const session = require("express-session");
 const bodyParser = require("body-parser");
 const path = require("path");
 const app = express();
-const port = 2000;
+//const port = 2000;
 const sqlite3 = require('sqlite3').verbose();
 var crypto = require('crypto');
 const connection = require('./db')
@@ -83,6 +83,7 @@ app.use(
         secret: "Keep it secret",
         name: "uniqueSessionID",
         saveUninitialized: false,
+        resave: false
     })
 );
 
@@ -105,7 +106,7 @@ app.get("/", (req, res) => {
 
 
 
-app.post("/authenticate", bodyParser.urlencoded(), async (req, res) => {
+app.post("/authenticate", bodyParser.urlencoded({extended: true}), async (req, res) => {
   
   
   // Opgave 1
@@ -139,7 +140,7 @@ app.get("/logout", (req, res) => {
   return res.send("Thank you! Visit again");
 });
 
-app.post("/saveItem", bodyParser.urlencoded(), async (req, res) => {
+app.post("/saveItem", bodyParser.urlencoded({extended: true}), async (req, res) => {
   const task = await saveTask(req.body.taskName)
   console.log(task)
   })
@@ -153,7 +154,7 @@ app.get("/signup", (req, res) => {
   }
 });
 
-app.post("/signup", bodyParser.urlencoded(), async (req, res) => {
+app.post("/signup", bodyParser.urlencoded({extended: true}), async (req, res) => {
   const user = await getUserByUsername(req.body.username)
   console.log(user)
   if (user.length > 0) {
@@ -171,6 +172,10 @@ app.post("/signup", bodyParser.urlencoded(), async (req, res) => {
 
 
 
-app.listen(port, () => {
+/*app.listen(port, () => {
   console.log("Website is running");
-}); 
+});*/
+
+const PORT = process.env.PORT || 2000;
+app.listen(PORT);
+console.log(`server startet on ${PORT}`);
