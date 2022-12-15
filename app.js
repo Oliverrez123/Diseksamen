@@ -4,7 +4,6 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const app = express();
 //const port = 2000;
-const sqlite3 = require('sqlite3').verbose();
 var crypto = require('crypto');
 const connection = require('./db')
 const taskName = require('./FrontDev/index')
@@ -24,7 +23,7 @@ const taskDB = connection.query('CREATE TABLE if not exists task_table1 (task_id
  
 
 // Tilføjer user til db
-const addUserToDatabase = (username, password) => {
+const gemBrugerDB = (username, password) => {
   connection.query(
     'insert into user_table (username, password) values (?, ?)', 
     [username, password], 
@@ -37,7 +36,7 @@ const addUserToDatabase = (username, password) => {
   );
 }
 
-function saveTask(taskName){
+function gemOpg(taskName){
   connection.query(
 'insert into task_table1 (taskname) values (?)', 
 [taskName], 
@@ -141,7 +140,7 @@ app.get("/logout", (req, res) => {
 });
 
 app.post("/saveItem", bodyParser.urlencoded({extended: true}), async (req, res) => {
-  const task = await saveTask(req.body.taskName)
+  const task = await gemOpg(req.body.taskName)
   console.log(task)
   })
 
@@ -164,7 +163,7 @@ app.post("/signup", bodyParser.urlencoded({extended: true}), async (req, res) =>
   // Opgave 2
   // Brug funktionen hashPassword til at kryptere passwords (husk både at hash ved signup og login!)
   let hashedPassword = hashPassword(req.body.password)
-  addUserToDatabase(req.body.username, hashedPassword);
+  gemBrugerDB(req.body.username, hashedPassword);
   console.log(req.body.username, req.body.password)
   res.redirect('/');
 })  

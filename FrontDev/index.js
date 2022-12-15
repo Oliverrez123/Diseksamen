@@ -32,7 +32,7 @@ function createTask(){
 }
 
 /*
-const saveTaskToDatabase = (taskname) => {
+const gemOpgToDatabase = (taskname) => {
     const taskname = document.getElementById('task-name').value
 connection.query(
 'insert into task_table1 (taskname) values (?)', 
@@ -45,7 +45,7 @@ function(err) {
 }
 );
 } */
-/*function saveTask(){
+/*function gemOpg(){
  
 
    /* var todo = document.getElementById("todo");
