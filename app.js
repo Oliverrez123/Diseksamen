@@ -25,16 +25,12 @@ const taskDB = connection.query('CREATE TABLE if not exists task_table1 (task_id
 // Tilføjer user til db
 const gemBrugerDB = (username, password) => {
   connection.query(
-    'insert into user_table (username, password) values (?, ?)', 
-    [username, password], 
+    'insert into user_table (username, password) values (?, ?)', [username, password], 
     console.log(username + password),
-    function(err) {
-      if (err) {
+    function(err){
+      if (err){
         console.error(err);
-      }
-    }
-  );
-}
+      } });}
 
 function gemOpg(taskName){
   connection.query(
@@ -49,7 +45,7 @@ if (err) {
 
 
 
-const getUserByUsername = (username) => {
+const findBruger = (username) => {
   // Smart måde at konvertere fra callback til promise:
   return new Promise((resolve, reject) => {  
     connection.query(
@@ -60,16 +56,13 @@ const getUserByUsername = (username) => {
           console.error(err);
           return reject(err);
         }
-        return resolve(rows);
-      }
-    );
-  })
+        return resolve(rows);} );})
 }
 
 const md5sum = crypto.createHash('md5');
 const salt = 'Some salt for the hash';
 
-const hashPassword = (password) => {
+const hPW = (password) => {
   return md5sum.update(password + salt).digest('hex');
 }
 
@@ -105,14 +98,14 @@ app.get("/", (req, res) => {
 
 
 
-app.post("/authenticate", bodyParser.urlencoded({extended: true}), async (req, res) => {
+app.post("/true", bodyParser.urlencoded({extended: true}), async (req, res) => {
   
   
   // Opgave 1
   // Programmer så at brugeren kan logge ind med sit brugernavn og password
 
   // Henter vi brugeren ud fra databasen
-  const user = await getUserByUsername(req.body.username)
+  const user = await findBruger(req.body.username)
   console.log({user});
   console.log({reqBody: req.body});
 
@@ -122,7 +115,7 @@ app.post("/authenticate", bodyParser.urlencoded({extended: true}), async (req, r
   }
 
   // Hint: Her skal vi tjekke om brugeren findes i databasen og om passwordet er korrekt
-  if (user[0].password == hashPassword(req.body.password)) {
+  if (user[0].password == hPW(req.body.password)) {
       req.session.loggedIn = true;
       req.session.username = req.body.username;
       console.log(req.session);
@@ -145,24 +138,24 @@ app.post("/saveItem", bodyParser.urlencoded({extended: true}), async (req, res) 
   })
 
 
-app.get("/signup", (req, res) => {
+app.get("/register", (req, res) => {
   if (req.session.loggedIn) {
-      return res.redirect("/dashboard");
+      return res.redirect("/brugerflade");
   } else {
-      return res.sendFile("signup.html", { root: path.join(__dirname, "FrontDev") });
+      return res.sendFile("register.html", { root: path.join(__dirname, "FrontDev") });
   }
 });
 
-app.post("/signup", bodyParser.urlencoded({extended: true}), async (req, res) => {
-  const user = await getUserByUsername(req.body.username)
+app.post("/register", bodyParser.urlencoded({extended: true}), async (req, res) => {
+  const user = await findBruger(req.body.username)
   console.log(user)
   if (user.length > 0) {
-    return res.send('Username already exists');
+    return res.send("bruger eksisterer allerede");
   }
 
   // Opgave 2
-  // Brug funktionen hashPassword til at kryptere passwords (husk både at hash ved signup og login!)
-  let hashedPassword = hashPassword(req.body.password)
+  // Brug funktionen hPW til at kryptere passwords (husk både at hash ved register og login!)
+  let hashedPassword = hPW(req.body.password)
   gemBrugerDB(req.body.username, hashedPassword);
   console.log(req.body.username, req.body.password)
   res.redirect('/');
