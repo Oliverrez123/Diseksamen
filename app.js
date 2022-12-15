@@ -65,9 +65,6 @@ const salt = 'Some salt for the hash';
 const hPW = (password) => {
   return md5sum.update(password + salt).digest('hex');
 }
-
-
-
 app.use(express.static(__dirname + '/FrontDev'))
 
 app.use(
@@ -76,7 +73,7 @@ app.use(
         name: "uniqueSessionID",
         saveUninitialized: false,
         resave: false
-    })
+  })
 );
 
 app.get("/", (req, res) => {
@@ -84,8 +81,7 @@ app.get("/", (req, res) => {
         return res.sendFile("/index.html", { root: path.join(__dirname, "FrontDev")});
     } else {
         return res.sendFile("login.html", { root: path.join(__dirname, "FrontDev") });
-    }
-});
+    }});
 
 
 
@@ -123,14 +119,9 @@ app.post("/true", bodyParser.urlencoded({extended: true}), async (req, res) => {
   } else {
       // Sender en error 401 (unauthorized) til klienten
       return  res.sendStatus(401);
-  }
-});
+  }});
 
 
-app.get("/logout", (req, res) => {
-  req.session.destroy((err) => {});
-  return res.send("Thank you! Visit again");
-});
 
 app.post("/saveItem", bodyParser.urlencoded({extended: true}), async (req, res) => {
   const task = await gemOpg(req.body.taskName)
