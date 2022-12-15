@@ -72,7 +72,7 @@ app.use(express.static(__dirname + '/FrontDev'))
 
 app.use(
     session({
-        secret: "Keep it secret",
+        secret: "hold det hemmeligt",
         name: "uniqueSessionID",
         saveUninitialized: false,
         resave: false
