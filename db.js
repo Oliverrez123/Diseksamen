@@ -6,10 +6,10 @@ const database = mysql2.createConnection({
     host: "db-mysql-fra1-84843-do-user-13098075-0.b.db.ondigitalocean.com",
     port: 25060,
     database: "kanbandb",
-    //sslmode: "REQUIRED"
+    //sslmode: "REQUIRED" 
 
-}
-)
+
+})
 
 database.connect((err) =>{
     if (err) {

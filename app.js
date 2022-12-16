@@ -107,7 +107,7 @@ app.post("/true", bodyParser.urlencoded({extended: true}), async (req, res) => {
 
   if(user.length === 0) {
     console.log('no user found')
-    return res.sendFile("login.html", { root: path.join(__dirname, "FrontDev") });
+    return res.sendFile("login.html",   { root: path.join(__dirname, "FrontDev") });
   }
 
   // Hint: Her skal vi tjekke om brugeren findes i databasen og om passwordet er korrekt
@@ -115,8 +115,7 @@ app.post("/true", bodyParser.urlencoded({extended: true}), async (req, res) => {
       req.session.loggedIn = true;
       req.session.username = req.body.username;
       console.log(req.session);
-      res.sendFile("index.html", { root: path.join(__dirname, "FrontDev") });
-  } else {
+      res.sendFile("index.html", { root: path.join(__dirname, "FrontDev") });} else {
       // Sender en error 401 (unauthorized) til klienten
       return  res.sendStatus(401);
   }});
@@ -125,8 +124,7 @@ app.post("/true", bodyParser.urlencoded({extended: true}), async (req, res) => {
 
 app.post("/saveItem", bodyParser.urlencoded({extended: true}), async (req, res) => {
   const task = await gemOpg(req.body.taskName)
-  console.log(task)
-  })
+  console.log(task) })
 
 
 app.get("/register", (req, res) => {
@@ -134,15 +132,13 @@ app.get("/register", (req, res) => {
       return res.redirect("/brugerflade");
   } else {
       return res.sendFile("register.html", { root: path.join(__dirname, "FrontDev") });
-  }
-});
+  }});
 
 app.post("/register", bodyParser.urlencoded({extended: true}), async (req, res) => {
   const user = await findBruger(req.body.username)
   console.log(user)
   if (user.length > 0) {
-    return res.send("bruger eksisterer allerede");
-  }
+    return res.send("bruger eksisterer allerede"); }
 
   // Opgave 2
   // Brug funktionen hPW til at kryptere passwords (husk både at hash ved register og login!)
@@ -153,12 +149,6 @@ app.post("/register", bodyParser.urlencoded({extended: true}), async (req, res) 
 })  
   
 
-
-
-/*app.listen(port, () => {
-  console.log("Website is running");
-});*/
-
 const PORT = process.env.PORT || 2000;
 app.listen(PORT);
-console.log(`server startet on ${PORT}`);
+console.log(`Op og køre på port ${PORT}`);
