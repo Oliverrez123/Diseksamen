@@ -6,13 +6,13 @@ const app = express();
 //const port = 2000;
 var crypto = require('crypto');
 const connection = require('./db')
-const taskName = require('./FrontDev/index')
+const opgaveNavn = require('./FrontDev/index')
 
 
 const userDB = connection.query('CREATE TABLE if not exists user_table (user_id int NOT NULL AUTO_INCREMENT, username varchar(255), password varchar(255), PRIMARY KEY(user_id))')
 
-const taskDB1 = connection.query('CREATE TABLE if not exists task_table (task_id int NOT NULL AUTO_INCREMENT, taskname varchar(255), process varchar(255), PRIMARY KEY(task_id))')
-const taskDB = connection.query('CREATE TABLE if not exists task_table1 (task_id int NOT NULL AUTO_INCREMENT, taskname varchar(255), PRIMARY KEY(task_id))')
+const taskDB1 = connection.query('CREATE TABLE if not exists task_table (task_id int NOT NULL AUTO_INCREMENT, opgaveNavn varchar(255), process varchar(255), PRIMARY KEY(task_id))')
+const taskDB = connection.query('CREATE TABLE if not exists task_table1 (task_id int NOT NULL AUTO_INCREMENT, opgaveNavn varchar(255), PRIMARY KEY(task_id))')
 // Sqlite ting
 //const db = new sqlite3.Database('./db.sqlite');
 
@@ -32,11 +32,11 @@ const gemBrugerDB = (username, password) => {
         console.error(err);
       } });}
 
-function gemOpg(taskName){
+function gemOpg(opgaveNavn){
   connection.query(
-'insert into task_table1 (taskname) values (?)', 
-[taskName], 
-console.log(taskName),
+'insert into task_table1 (opgaveNavn) values (?)', 
+[opgaveNavn], 
+console.log(opgaveNavn),
 function(err) {
 if (err) {
   console.error(err);
@@ -123,7 +123,7 @@ app.post("/true", bodyParser.urlencoded({extended: true}), async (req, res) => {
 
 
 app.post("/saveItem", bodyParser.urlencoded({extended: true}), async (req, res) => {
-  const task = await gemOpg(req.body.taskName)
+  const task = await gemOpg(req.body.opgaveNavn)
   console.log(task) })
 
 
