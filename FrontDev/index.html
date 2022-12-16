@@ -4,9 +4,8 @@
     <link rel="stylesheet" href="./board.css">
     <title>Kanban Board</title>
     <script>
-    //const connection = require('/../db')
-    
-    
+
+
     function drag(ev) {
         ev.dataTransfer.setData("text", ev.target.id);
     }
@@ -38,15 +37,15 @@
 
 
     function gemOpg(){
-     var todo = document.getElementById("todo");
+     var skalGoeres = document.getElementById("skalGoeres");
         var taskName = document.getElementById("task-name").value;
-        todo.innerHTML += `
+        skalGoeres.innerHTML += `
         <div class="task" id="${taskName.toLowerCase().split(" ").join("")}" draggable="true" ondragstart="drag(event)">
             <span>${taskName}</span>
         </div>`
           } 
 
-    function editTask(){
+    function changeOpg(){
         var saveButton = document.getElementById("save-button");
         var editButton = document.getElementById("edit-button");
         if (saveButton.style.display === "none") {
@@ -66,7 +65,7 @@
             <strong class="kanban-heading-text">Kanban Board</strong>
         </div>
         <div class="kanban-board">
-            <div class="kanban-block" id="todo" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div class="kanban-block" id="skalGoeres" ondrop="drop(event)" ondragover="allowDrop(event)">
                 <strong>To Do</strong>
                 <div class="task-button-block">
                     <button id="task-button" onclick="createTask()">Create new task</span>
@@ -109,13 +108,13 @@
                 <span class="form-row">
                     <label class="form-row-label" for="task-name">Status</label>
                     <select class="form-row-input" name="task-status" id="task-status">
-                        <option value="todo">To Do</option>
+                        <option value="skalGoeres">To Do</option>
                         <option value="inprogress">In Progress</option>
                         <option value="done">Done</option>
                     </select>
                 </span>
                 <span class="form-row-buttons">
-                    <button id="edit-button" onclick="editTask()">Edit</span>
+                    <button id="edit-button" onclick="changeOpg()">Edit</span>
                     <button id="save-button" onclick="gemOpg()">Save</span>
                     <button id="cancel-button" onclick="createTask()">Cancel</span>
                 </span>
