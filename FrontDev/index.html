@@ -22,8 +22,8 @@
 
     function createTask(){
         var x = document.getElementById("igangvaerende");
-        var y = document.getElementById("done");
-        var z = document.getElementById("create-new-task-block");
+        var y = document.getElementById("Færdig");
+        var z = document.getElementById("lavnyopgaveblok");
         if (x.style.display === "none") {
             x.style.display = "block";
             y.style.display = "block";
@@ -46,8 +46,8 @@
           } 
 
     function changeOpg(){
-        var saveButton = document.getElementById("save-button");
-        var editButton = document.getElementById("edit-button");
+        var saveButton = document.getElementById("gemknap");
+        var editButton = document.getElementById("redigerknap");
         if (saveButton.style.display === "none") {
             saveButton.style.display = "block";
             editButton.style.display = "none";
@@ -66,57 +66,42 @@
         </div>
         <div class="kanban-board">
             <div class="kanban-block" id="skalGoeres" ondrop="drop(event)" ondragover="allowDrop(event)">
-                <p>To Do</p>
-                <div class="task-button-block">
-                    <button id="task-button" onclick="createTask()">Create new task</span>
+                <p>Skal gøres</p>
+                <div class="opgknap-block">
+                    <button id="opgknap" onclick="createTask()">Ny opgave</span>
                 </div>
                 <div class="task" id="task1" draggable="true" ondragstart="drag(event)">
                     <span>Task 1</span>
                 </div>
-                <div class="task" id="task2" draggable="true" ondragstart="drag(event)">
-                    <span>Task 2</span>
-                </div>
-                <div class="task" id="task3" draggable="true" ondragstart="drag(event)">
-                    <span>Task 3</span>
-                </div>
-                <div class="task" id="task4" draggable="true" ondragstart="drag(event)">
-                    <span>Task 4</span>
-                </div>
-                <div class="task" id="task5" draggable="true" ondragstart="drag(event)">
-                    <span>Task 5</span>
-                </div>
-                <div class="task" id="task6" draggable="true" ondragstart="drag(event)">
-                    <span>Task 6</span>
-                </div>
             </div>
             <div class="kanban-block" id="igangvaerende" ondrop="drop(event)" ondragover="allowDrop(event)">
-                <p>In Progress</p>
+                <p>Igangværende</p>
             </div>
-            <div class="kanban-block" id="done" ondrop="drop(event)" ondragover="allowDrop(event)">
-                <p>Done</p>
+            <div class="kanban-block" id="Færdig" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <p>Færdig</p>
             </div>
-            <div class="create-new-task-block" id="create-new-task-block">
+            <div class="lavnyopgaveblok" id="lavnyopgaveblok">
                 <p>New Task</p>
-                <span class="form-row">
-                    <label class="form-row-label" for="opgave-navn">Task</label>
-                    <input class="form-row-input" type="text" name="opgave-navn" id="opgave-navn">
+                <span class="inputraekke">
+                    <label class="raekkeprint" for="opgave-navn">Task</label>
+                    <input class="raekkeinput" type="text" name="opgave-navn" id="opgave-navn">
                 </span>
-                <span class="form-row">
-                    <label class="form-row-label" for="opgave-navn">Description</label>
-                    <textarea class="form-row-input" name="task-description" id="task-description" cols="70" rows="10"></textarea>
+                <span class="inputraekke">
+                    <label class="raekkeprint" for="opgave-navn">Description</label>
+                    <textarea class="raekkeinput" name="task-description" id="task-description" cols="52" rows="15"></textarea>
                 </span>
-                <span class="form-row">
-                    <label class="form-row-label" for="opgave-navn">Status</label>
-                    <select class="form-row-input" name="task-status" id="task-status">
-                        <option value="skalGoeres">To Do</option>
-                        <option value="igangvaerende">In Progress</option>
-                        <option value="done">Done</option>
+                <span class="inputraekke">
+                    <label class="raekkeprint" for="opgave-navn">Status</label>
+                    <select class="raekkeinput" name="task-status" id="task-status">
+                        <option value="skalGoeres">Skal gøres</option>
+                        <option value="igangvaerende">Igangværende</option>
+                        <option value="Færdig">Færdig</option>
                     </select>
                 </span>
-                <span class="form-row-buttons">
-                    <button id="edit-button" onclick="changeOpg()">Edit</span>
-                    <button id="save-button" onclick="gemOpg()">Save</span>
-                    <button id="cancel-button" onclick="createTask()">Cancel</span>
+                <span class="raekkeknapns">
+                    <button id="redigerknap" onclick="changeOpg()"></span>
+                    <button id="gemknap" onclick="gemOpg()">Save</span>
+                    <button id="tilbageknap" onclick="createTask()">Cancel</span>
                 </span>
             </div>
         </div>

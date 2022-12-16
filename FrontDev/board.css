@@ -33,7 +33,7 @@ body {
 }
 
 .kanban-block,
-.create-new-task-block {
+.lavnyopgaveblok {
   padding: 0.6rem;
   width: 30.5%;
   min-width: 14rem;
@@ -50,7 +50,7 @@ body {
   /* display: none; */
 }
 
-#done {
+#Færdig {
   background-color: #018b01;
   /* display: none; */
 }
@@ -63,7 +63,7 @@ body {
   padding: 0.5rem 0.2rem 0.5rem 2rem;
 }
 
-#task-button {
+#opgknap {
   margin: 0.2rem 0rem 0.1rem 0rem;
   background-color: white;
   border-radius: 0.2rem;
@@ -74,7 +74,7 @@ body {
   font-size: 1rem;
 }
 
-.create-new-task-block {
+.lavnyopgaveblok {
   display: none;
   /* display: flex; */
   background: #ffaf00;
@@ -82,13 +82,13 @@ body {
   flex-direction: column;
 }
 
-.form-row {
+.inputraekke {
   display: flex;
   flex-direction: row;
   margin: 0.2rem;
 }
 
-.form-row-label {
+.raekkeprint {
   width: 15%;
   padding: 0.2rem;
   padding-right: 0.5rem;
@@ -97,26 +97,26 @@ body {
   border-radius: 0.2rem 0rem 0rem 0.2rem;
 }
 
-.form-row-input {
+.raekkeinput {
   border: 0.1rem solid black;
   border-radius: 0rem 0.2rem 0.2rem 0rem;
   width: 85%;
 }
 
-textarea {
+.textarea {
   resize: none;
 }
 
-.form-row-buttons {
+.raekkeknapns {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin: 0.2rem;
 }
 
-#edit-button,
-#save-button,
-#cancel-button {
+#redigerknap,
+#gemknap,
+#tilbageknap {
   margin: 0.2rem 0rem 0.1rem 0rem;
   background-color: white;
   border-radius: 0.2rem;
@@ -127,7 +127,7 @@ textarea {
   font-size: 1rem;
 }
 
-#edit-button {
+#redigerknap {
   display: none;
 }
 
