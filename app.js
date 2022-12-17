@@ -104,6 +104,7 @@ app.post("/true", bodyParser.urlencoded({extended: true}), async (req, res) => {
 //laver diverse endpoints
 app.post("/saveItem", bodyParser.urlencoded({extended: true}), async (req, res) => {
   const task = await gemOpg(req.body.opgaveNavn)
+
   console.log(task) })
 
 
@@ -113,7 +114,7 @@ app.get("/register", (req, res) => {
   } else {
       return res.sendFile("register.html", { root: path.join(__dirname, "FrontDev") });
   }});
-
+//asynkron funktion,  venter på at brugeren er fundet før koden kører videre
 app.post("/register", bodyParser.urlencoded({extended: true}), async (req, res) => {
   const user = await findBruger(req.body.username)
   console.log(user)
@@ -128,7 +129,7 @@ app.post("/register", bodyParser.urlencoded({extended: true}), async (req, res) 
   res.redirect('/');
 })  
   
-
+//Starter serveren på port 2000.(localhost)
 const PORT = process.env.PORT || 2000;
 app.listen(PORT);
 console.log(`Op og køre på port ${PORT}`);

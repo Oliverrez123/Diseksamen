@@ -5,8 +5,8 @@ body {
   
 }
 .container {
-  width: 70%;
-  min-width: 50%;
+  width: 100%;
+  min-width: 33%;
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -26,14 +26,64 @@ body {
 }
 
 .kanbantekst {
-  font-size: 1.8rem;
+  font-size: 2rem;
 
   background-color: white;
 
-  padding: 0.8rem 1.7rem;
-  border-radius: 0.5rem;
-  margin: 1rem;
+  padding: 0.79rem 1.69rem;
+  border-radius: 0.49rem;
+  margin: 0.99rem;
 }
+
+
+.inputraekke {
+  display: flex;
+  flex-direction: row;
+  margin: 0.19rem;
+}
+
+.raekkeprint {
+  width: 14.9%;
+  padding: 0.19rem;
+  padding-right: 0.5rem;
+  border: 0.09rem solid black;
+  border-right: 0;
+  border-radius: 0.19rem 0rem 0rem 0.19rem;
+}
+
+.raekkeinput {
+  border: 0.1rem solid black;
+  border-radius: 0rem 0.2rem 0.2rem 0rem;
+  width: 84.9%;
+}
+
+.textarea {
+  resize: none;
+}
+
+.raekkeknapns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0.19rem;
+}
+#redigerknap,
+#gemknap,
+#tilbageknap {
+  margin: 0.19rem 0rem 0.09rem 0rem;
+  background-color: white;
+  border-radius: 0.2rem;
+  width: 45.2%;
+  border: 0.25rem solid black;
+  padding: 0.3rem 1.75rem;
+  border-radius: 0.3rem;
+  font-size: 0.9rem;
+}
+#redigerknap {
+  display: none;
+}
+
+  
 
 .kanban-block,
 .lavnyopgaveblok {
@@ -49,29 +99,29 @@ body {
 }
 
 #igangvaerende {
-  background-color: #ffaf00;
-  /* display: none; */
+  background-color: yellow;
+ 
 }
 
 #Færdig {
-  background-color: #018b01;
-  /* display: none; */
+  background-color: green;
+  
 }
 
 .task {
   background-color: white;
-  margin: 0.2rem 0rem 0.3rem 0rem;
-  border: 0.1rem solid black;
+  margin: 0.19rem 0rem 0.29rem 0rem;
+  border: 0.09rem solid black;
   border-radius: 0.2rem;
-  padding: 0.5rem 0.2rem 0.5rem 2rem;
+  padding: 0.49rem 0.19rem 0.49rem 1.9rem;
 }
 
 #opgknap {
-  margin: 0.2rem 0rem 0.1rem 0rem;
+  margin: 0.19rem 0rem 0.09rem 0rem;
   background-color: white;
-  border-radius: 0.2rem;
+  border-radius: 0.19rem;
   width: 100%;
-  border: 0.25rem solid black;
+  border: 0.249rem solid black;
   padding: 0.5rem 2.7rem;
   border-radius: 0.3rem;
   font-size: 1rem;
@@ -83,52 +133,3 @@ body {
   width: 64.4%;
   flex-direction: column;
 }
-
-.inputraekke {
-  display: flex;
-  flex-direction: row;
-  margin: 0.2rem;
-}
-
-.raekkeprint {
-  width: 15%;
-  padding: 0.2rem;
-  padding-right: 0.5rem;
-  border: 0.1rem solid black;
-  border-right: 0;
-  border-radius: 0.2rem 0rem 0rem 0.2rem;
-}
-
-.raekkeinput {
-  border: 0.1rem solid black;
-  border-radius: 0rem 0.2rem 0.2rem 0rem;
-  width: 85%;
-}
-
-.textarea {
-  resize: none;
-}
-
-.raekkeknapns {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin: 0.2rem;
-}
-#redigerknap,
-#gemknap,
-#tilbageknap {
-  margin: 0.2rem 0rem 0.1rem 0rem;
-  background-color: white;
-  border-radius: 0.2rem;
-  width: 45.2%;
-  border: 0.25rem solid black;
-  padding: 0.3rem 1.75rem;
-  border-radius: 0.3rem;
-  font-size: 1rem;
-}
-#redigerknap {
-  display: none;
-}
-
-  
