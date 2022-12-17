@@ -1,6 +1,8 @@
 
 const mysql2 = require('mysql2')
 
+
+
 const database = mysql2.createConnection({
     user: 'Oliverrez',
     password: "AVNS_aBleA_r7j8oZ5oyXC4D",

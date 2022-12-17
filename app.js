@@ -25,7 +25,7 @@ const gemBrugerDB = (username, password) => {
       if (err){
         console.error(err);
       } });}
-//Funktion til DB
+//Funktion til DB, så opgaver kan gemmes
       function gemOpg(opgaveNavn){
   connection.query(
 'insert into task_table1 (opgaveNavn) values (?)', 
@@ -40,7 +40,6 @@ if (err) {
 
 
 const findBruger = (username) => {
-  // Smart måde at konvertere fra callback til promise:
   return new Promise((resolve, reject) => {  
     connection.query(
       'select * from user_table where userName=(?)',
@@ -48,8 +47,7 @@ const findBruger = (username) => {
       (err, rows) => {
         if (err) {
           console.error(err);
-          return reject(err);
-        }
+          return reject(err);}
         return resolve(rows);} );})}
 
 const md5sum = crypto.createHash('md5');
@@ -97,7 +95,7 @@ app.post("/true", bodyParser.urlencoded({extended: true}), async (req, res) => {
       req.session.loggedIn = true;
       req.session.username = req.body.username;
       console.log(req.session);
-      
+
       res.sendFile("index.html", { root: path.join(__dirname, "FrontDev") });} else {
         return  res.sendStatus(401);
   }});
