@@ -4,7 +4,6 @@ body {
   
   
 }
-
 .container {
   width: 70%;
   min-width: 50%;
@@ -12,24 +11,25 @@ body {
   display: flex;
   flex-direction: column;
 }
-
 .kanbanheading {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  font-family: sans-serif;
+  font-family: 'Times New Roman', Times, serif;
 }
 
 .kanban-board {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  font-family: sans-serif;
+  font-family: 'Times New Roman', Times, serif;
 }
 
 .kanbantekst {
   font-size: 1.8rem;
-  background-color: tomato;
+
+  background-color: white;
+
   padding: 0.8rem 1.7rem;
   border-radius: 0.5rem;
   margin: 1rem;
@@ -79,7 +79,6 @@ body {
 
 .lavnyopgaveblok {
   display: none;
-  /* display: flex; */
   background: #ffaf00;
   width: 64.4%;
   flex-direction: column;
@@ -116,20 +115,18 @@ body {
   justify-content: space-between;
   margin: 0.2rem;
 }
-
 #redigerknap,
 #gemknap,
 #tilbageknap {
   margin: 0.2rem 0rem 0.1rem 0rem;
   background-color: white;
   border-radius: 0.2rem;
-  width: 49.2%;
+  width: 45.2%;
   border: 0.25rem solid black;
-  padding: 0.5rem 2.7rem;
+  padding: 0.3rem 1.75rem;
   border-radius: 0.3rem;
   font-size: 1rem;
 }
-
 #redigerknap {
   display: none;
 }

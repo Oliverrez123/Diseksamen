@@ -1,28 +1,22 @@
+
+//Henter node moduler
 const express = require("express");
 const session = require("express-session");
 const bodyParser = require("body-parser");
 const path = require("path");
 const app = express();
-//const port = 2000;
 var crypto = require('crypto');
 const connection = require('./db')
 const opgaveNavn = require('./FrontDev/index')
 
 
+//Laver tabeller til DB, med tilhørende
 const userDB = connection.query('CREATE TABLE if not exists user_table (user_id int NOT NULL AUTO_INCREMENT, username varchar(255), password varchar(255), PRIMARY KEY(user_id))')
 
 const taskDB1 = connection.query('CREATE TABLE if not exists task_table (task_id int NOT NULL AUTO_INCREMENT, opgaveNavn varchar(255), process varchar(255), PRIMARY KEY(task_id))')
 const taskDB = connection.query('CREATE TABLE if not exists task_table1 (task_id int NOT NULL AUTO_INCREMENT, opgaveNavn varchar(255), PRIMARY KEY(task_id))')
-// Sqlite ting
-//const db = new sqlite3.Database('./db.sqlite');
 
-/*db.serialize(function() {
-  console.log('creating databases if they don\'t exist');
-  db.run('create table if not exists users (userId integer primary key, username text not null, password text not null)');
-});*/
- 
-
-// Tilføjer user til db
+// Tilføjer brugeren til database, med username og PW
 const gemBrugerDB = (username, password) => {
   connection.query(
     'insert into user_table (username, password) values (?, ?)', [username, password], 
@@ -31,8 +25,8 @@ const gemBrugerDB = (username, password) => {
       if (err){
         console.error(err);
       } });}
-
-function gemOpg(opgaveNavn){
+//Funktion til DB
+      function gemOpg(opgaveNavn){
   connection.query(
 'insert into task_table1 (opgaveNavn) values (?)', 
 [opgaveNavn], 
@@ -56,11 +50,10 @@ const findBruger = (username) => {
           console.error(err);
           return reject(err);
         }
-        return resolve(rows);} );})
-}
+        return resolve(rows);} );})}
 
 const md5sum = crypto.createHash('md5');
-const salt = 'Some salt for the hash';
+const salt = 'Skal du saltes?';
 
 const hPW = (password) => {
   return md5sum.update(password + salt).digest('hex');
@@ -75,7 +68,7 @@ app.use(
         resave: false
   })
 );
-
+//Opretter default endpoint. Hvis bruger er logget ind bliver de redirectet til brugerflade, ellers tilbage til login
 app.get("/", (req, res) => {
     if (req.session.loggedIn) {
         return res.sendFile("/index.html", { root: path.join(__dirname, "FrontDev")});
@@ -85,43 +78,32 @@ app.get("/", (req, res) => {
 
 
 
-
-
-
-
-
-
-
-
-
 app.post("/true", bodyParser.urlencoded({extended: true}), async (req, res) => {
   
   
-  // Opgave 1
-  // Programmer så at brugeren kan logge ind med sit brugernavn og password
 
-  // Henter vi brugeren ud fra databasen
+  // Finder bruger fra DB 
   const user = await findBruger(req.body.username)
   console.log({user});
   console.log({reqBody: req.body});
-
+//Redirecter brugeren til login.html hvis brugeren ikke logger ind med gyldig konto
   if(user.length === 0) {
     console.log('no user found')
     return res.sendFile("login.html",   { root: path.join(__dirname, "FrontDev") });
   }
 
-  // Hint: Her skal vi tjekke om brugeren findes i databasen og om passwordet er korrekt
+  // Tjekker hvorledes bruger er i database samt om inputs er korrekte
   if (user[0].password == hPW(req.body.password)) {
       req.session.loggedIn = true;
       req.session.username = req.body.username;
       console.log(req.session);
+      
       res.sendFile("index.html", { root: path.join(__dirname, "FrontDev") });} else {
-      // Sender en error 401 (unauthorized) til klienten
-      return  res.sendStatus(401);
+        return  res.sendStatus(401);
   }});
 
 
-
+//laver diverse endpoints
 app.post("/saveItem", bodyParser.urlencoded({extended: true}), async (req, res) => {
   const task = await gemOpg(req.body.opgaveNavn)
   console.log(task) })
@@ -140,8 +122,8 @@ app.post("/register", bodyParser.urlencoded({extended: true}), async (req, res) 
   if (user.length > 0) {
     return res.send("bruger eksisterer allerede"); }
 
-  // Opgave 2
-  // Brug funktionen hPW til at kryptere passwords (husk både at hash ved register og login!)
+ 
+  //Krypterer password fra bruger
   let hashedPassword = hPW(req.body.password)
   gemBrugerDB(req.body.username, hashedPassword);
   console.log(req.body.username, req.body.password)

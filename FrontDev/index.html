@@ -9,41 +9,34 @@
     function drag(ev) {
         ev.dataTransfer.setData("text", ev.target.id);
     }
-
-    function allowDrop(ev) {
+     function allowDrop(ev) {
         ev.preventDefault();
     }
-
-    function drop(ev) {
+  function drop(ev) {
         ev.preventDefault();
         var data = ev.dataTransfer.getData("text");
         ev.currentTarget.appendChild(document.getElementById(data));
     }
 
     function createTask(){
-        var x = document.getElementById("igangvaerende");
-        var y = document.getElementById("Færdig");
-        var z = document.getElementById("lavnyopgaveblok");
-        if (x.style.display === "none") {
-            x.style.display = "block";
-            y.style.display = "block";
-            z.style.display = "none";
+        var a = document.getElementById("igangvaerende");
+        var b = document.getElementById("Færdig");
+        var c = document.getElementById("lavnyopgaveblok");
+        if (a.style.display === "none") {
+            a.style.display = "block";
+            b.style.display = "block";
+            c.style.display = "none";
         } else {
-            x.style.display = "none";
-            y.style.display = "none";
-            z.style.display = "flex";
-        }
-    }
-
-
+            a.style.display = "none";
+            b.style.display = "none";
+            c.style.display = "flex";
+        }  }
     function gemOpg(){
      var skalGoeres = document.getElementById("skalGoeres");
         var opgaveNavn = document.getElementById("opgave-navn").value;
         skalGoeres.innerHTML += `
         <div class="task" id="${opgaveNavn.toLowerCase().split(" ").join("")}" draggable="true" ondragstart="drag(event)">
-            <span>${opgaveNavn}</span>
-        </div>`
-          } 
+            <span>${opgaveNavn}</span> </div>` } 
 
     function changeOpg(){
         var saveButton = document.getElementById("gemknap");
@@ -71,7 +64,7 @@
                     <button id="opgknap" onclick="createTask()">Ny opgave</span>
                 </div>
                 <div class="task" id="task1" draggable="true" ondragstart="drag(event)">
-                    <span>Task 1</span>
+                    <span>Opgave 1</span>
                 </div>
             </div>
             <div class="kanban-block" id="igangvaerende" ondrop="drop(event)" ondragover="allowDrop(event)">
@@ -90,8 +83,7 @@
                     <label class="raekkeprint" for="opgave-navn">Description</label>
                     <textarea class="raekkeinput" name="task-description" id="task-description" cols="52" rows="15"></textarea>
                 </span>
-                <span class="inputraekke">
-                    <label class="raekkeprint" for="opgave-navn">Status</label>
+                <span class="inputraekke">  <label class="raekkeprint" for="opgave-navn">Status</label>
                     <select class="raekkeinput" name="task-status" id="task-status">
                         <option value="skalGoeres">Skal gøres</option>
                         <option value="igangvaerende">Igangværende</option>
