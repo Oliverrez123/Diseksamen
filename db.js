@@ -1,3 +1,4 @@
+
 const mysql2 = require('mysql2')
 
 const database = mysql2.createConnection({
@@ -10,6 +11,12 @@ const database = mysql2.createConnection({
 
 
 })
+
+
+
+
+
+
 
 database.connect((err) =>{
     if (err) {
