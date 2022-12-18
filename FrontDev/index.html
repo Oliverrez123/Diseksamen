@@ -18,7 +18,7 @@
         ev.currentTarget.appendChild(document.getElementById(data));
     }
 
-    function createTask(){
+    function opgStart(){
         var a = document.getElementById("igangvaerende");
         var b = document.getElementById("Færdig");
         var c = document.getElementById("lavnyopgaveblok");
@@ -61,7 +61,7 @@
             <div class="kanban-block" id="skalGoeres" ondrop="drop(event)" ondragover="allowDrop(event)">
                 <p>Skal gøres</p>
                 <div class="opgknap-block">
-                    <button id="opgknap" onclick="createTask()">Ny opgave</span>
+                    <button id="opgknap" onclick="opgStart()">Ny opgave</span>
                 </div>
                 <div class="task" id="task1" draggable="true" ondragstart="drag(event)">
                     <span>Opgave 1</span>
@@ -93,7 +93,7 @@
                 <span class="raekkeknapns">
                     <button id="redigerknap" onclick="changeOpg()"></span>
                     <button id="gemknap" onclick="gemOpg()">Save</span>
-                    <button id="tilbageknap" onclick="createTask()">Cancel</span>
+                    <button id="tilbageknap" onclick="opgStart()">Cancel</span>
                 </span>
             </div>
         </div>
