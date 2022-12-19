@@ -5,18 +5,20 @@
     <title>Kanban Board</title>
     <script>
 
-
+//Bruger drag and drop API til at gøre så jeg kan samle boksene og droppe dem
     function drag(ev) {
+
         ev.dataTransfer.setData("text", ev.target.id);
     }
      function allowDrop(ev) {
+
         ev.preventDefault();
     }
   function drop(ev) {
+
         ev.preventDefault();
         var data = ev.dataTransfer.getData("text");
-        ev.currentTarget.appendChild(document.getElementById(data));
-    }
+        ev.currentTarget.appendChild(document.getElementById(data));}
 
     function opgStart(){
         var a = document.getElementById("igangvaerende");
@@ -27,10 +29,11 @@
             b.style.display = "block";
             c.style.display = "none";
         } else {
+
             a.style.display = "none";
             b.style.display = "none";
             c.style.display = "flex";
-        }  }
+        }}
     function gemOpg(){
      var skalGoeres = document.getElementById("skalGoeres");
         var opgaveNavn = document.getElementById("opgave-navn").value;
@@ -92,8 +95,8 @@
                 </span>
                 <span class="raekkeknapns">
                     <button id="redigerknap" onclick="changeOpg()"></span>
-                    <button id="gemknap" onclick="gemOpg()">Save</span>
-                    <button id="tilbageknap" onclick="opgStart()">Cancel</span>
+                    <button id="gemknap" onclick="gemOpg()">Gem</span>
+                    <button id="tilbageknap" onclick="opgStart()">Tilbage</span>
                 </span>
             </div>
         </div>
