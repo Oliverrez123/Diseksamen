@@ -38,7 +38,7 @@ if (err) {
 )}
 
 
-
+//Funktion til at finde bruger i DB
 const findBruger = (username) => {
   return new Promise((resolve, reject) => {  
     connection.query(
@@ -51,8 +51,8 @@ const findBruger = (username) => {
         return resolve(rows);} );})}
 
 const md5sum = crypto.createHash('md5');
-const salt = 'Skal du saltes?';
-
+const salt = 'Skal du æltes knægt?';
+//Bruger krypteret funktion til at output en fixed-size string til Password
 const hPW = (password) => {
   return md5sum.update(password + salt).digest('hex');
 }
@@ -78,8 +78,6 @@ app.get("/", (req, res) => {
 
 app.post("/true", bodyParser.urlencoded({extended: true}), async (req, res) => {
   
-  
-
   // Finder bruger fra DB 
   const user = await findBruger(req.body.username)
   console.log({user});
@@ -119,7 +117,7 @@ app.post("/register", bodyParser.urlencoded({extended: true}), async (req, res) 
   const user = await findBruger(req.body.username)
   console.log(user)
   if (user.length > 0) {
-    return res.send("bruger eksisterer allerede"); }
+    return res.send("Bruger eksisterer allerede"); }
 
  
   //Krypterer password fra bruger
